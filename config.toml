@@ -1,0 +1,20 @@
+# Reconciliation settings.
+# Money values are strings so they are read as Decimal, never as float.
+
+[limits]
+max_file_size_mb = 5       # the largest sample invoice is about 0.27 MB
+max_pages = 3              # invoices are single page; multi-page is out of scope
+
+[matching]
+amount_tolerance = "0.00"      # exact match by default
+suggestion_window_days = 14    # used only for SUGGESTIONS, never for auto-accept
+
+[extraction]
+prompt_version = "v1"
+request_timeout_s = 90
+delay_between_calls_s = 2
+max_retries = 4
+
+# Canonical carrier name (as written in the register) -> accepted aliases.
+[carrier_aliases]
+"Autotransportes Pena Hnos." = ["Pena Hermanos"]

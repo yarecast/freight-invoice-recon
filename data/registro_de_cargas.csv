@@ -1,0 +1,17 @@
+load_id,ship_date,carrier,origin,destination,commodity,agreed_rate,currency
+TRQ-4471,2026-09-02,Transportes del Norte Mendoza,"Monterrey, NL","Laredo, TX",Auto parts,42500.00,MXN
+TRQ-4472,2026-09-03,Rio Grande Freight Lines,"Brownsville, TX","Houston, TX",Appliances,1850.00,USD
+TRQ-4473,2026-09-03,Autotransportes Pena Hnos.,"Matamoros, Tamps.","Reynosa, Tamps.",Packaging,8900.00,MXN
+TRQ-4474,2026-09-04,Transportes del Norte Mendoza,"Saltillo, Coah.","McAllen, TX",Wire harness,38000.00,MXN
+TRQ-4475,2026-09-08,Rio Grande Freight Lines,"Laredo, TX","San Antonio, TX",Dry goods,975.00,USD
+TRQ-4476,2026-09-09,Autotransportes Pena Hnos.,"Matamoros, Tamps.","Monterrey, NL",Steel coil,15200.00,MXN
+TRQ-4477,2026-09-10,Transportes del Norte Mendoza,"Monterrey, NL","Brownsville, TX",Auto parts,45000.00,MXN
+TRQ-4478,2026-09-11,Rio Grande Freight Lines,"Pharr, TX","Dallas, TX",Produce,2400.00,USD
+TRQ-4479,2026-09-14,Autotransportes Pena Hnos.,"Reynosa, Tamps.","Matamoros, Tamps.",Empty racks,7500.00,MXN
+TRQ-4480,2026-09-15,Transportes del Norte Mendoza,"Queretaro, Qro.","Laredo, TX",Electronics,62000.00,MXN
+TRQ-4483,2026-09-18,Transportes del Norte Mendoza,"Monterrey, NL","Nuevo Laredo, Tamps.",Auto parts,18500.00,MXN
+TRQ-4484,2026-09-21,Rio Grande Freight Lines,"Laredo, TX","El Paso, TX",Machinery,2100.00,USD
+TRQ-4485,2026-09-22,Autotransportes Pena Hnos.,"Matamoros, Tamps.","Tampico, Tamps.",Chemicals (non-haz),22000.00,MXN
+TRQ-4486,2026-09-23,Transportes del Norte Mendoza,"Guadalajara, Jal.","Nogales, Son.",Appliances,55000.00,MXN
+TRQ-4487,2026-09-24,Rio Grande Freight Lines,"Harlingen, TX","Corpus Christi, TX",Dry goods,850.00,USD
+TRQ-4488,2026-09-25,Autotransportes Pena Hnos.,"Matamoros, Tamps.","Monterrey, NL",Steel coil,15200.00,MXN
