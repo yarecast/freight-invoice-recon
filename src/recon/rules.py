@@ -208,9 +208,19 @@ def _duplicates(items: list[InvoiceInput], aliases: dict[str, list[str]]) -> dic
         if number and carrier:
             by_number[(_carrier_key(carrier, aliases), number)].append(it.source_file)
 
+    same_number: dict[str, set[str]] = {}  # file -> files that repeat its invoice number
+    for files in by_number.values():
+        if len(files) > 1:
+            for f in files:
+                same_number[f] = set(files)
+
     out: dict[str, list[Finding]] = defaultdict(list)
     for load_id, files in by_load.items():
         if len(files) > 1:
+            # If every file on this load repeats the same invoice number, the number
+            # duplicate already explains it: do not emit a second finding for the load.
+            if all(same_number.get(f) == set(files) for f in files):
+                continue
             for f in files:
                 others = ", ".join(o for o in files if o != f)
                 out[f].append(Finding("DUPLICATE_LOAD_INVOICE", HIGH,
@@ -221,8 +231,8 @@ def _duplicates(items: list[InvoiceInput], aliases: dict[str, list[str]]) -> dic
             for f in files:
                 others = ", ".join(o for o in files if o != f)
                 out[f].append(Finding("DUPLICATE_INVOICE_NUMBER", HIGH,
-                                      f"El numero de factura {number} del mismo transportista aparece mas de una vez. Tambien en: {others}.",
-                                      "Rechazar la copia y pagar una sola vez."))
+                                      f"El numero de factura {number} aparece en mas de un archivo (tambien en: {others}). Parece la misma factura recibida dos veces.",
+                                      "Conservar una sola copia y pagar una vez."))
     return out
 
 
