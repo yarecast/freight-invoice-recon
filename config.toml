@@ -17,4 +17,4 @@ max_retries = 2
 
 # Canonical carrier name (as written in the register) -> accepted aliases.
 [carrier_aliases]
-"Autotransportes Pena Hnos." = ["Pena Hermanos"]
+"Autotransportes Pena Hnos." = ["Pena Hermanos", "Autotransportes Pena Hermanos"]
