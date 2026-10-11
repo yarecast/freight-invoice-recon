@@ -1,6 +1,8 @@
 """Business rules. Deterministic: every finding comes from code, never from the LLM."""
+import re
 from collections import defaultdict
 from dataclasses import dataclass
+from datetime import date
 from decimal import Decimal
 
 from .matching import Load, MatchResult, normalize_name, same_carrier
@@ -55,6 +57,32 @@ def annotated_amounts(extraction: InvoiceExtraction) -> list[Decimal]:
             if amount is not None:
                 found.append(amount)
     return found
+
+
+_NUMERIC_DATE_RE = re.compile(r"(\d{1,2})[/.\-](\d{1,2})[/.\-](\d{4})")
+
+
+def _date_reason(x: InvoiceExtraction, invoice_date: date, ship_date: date) -> str:
+    text = f"La factura tiene fecha {invoice_date.isoformat()}"
+    evidence = (x.invoice_date.evidence or "").strip()
+    found = _NUMERIC_DATE_RE.search(evidence)
+    if found:
+        a, b, year = int(found.group(1)), int(found.group(2)), int(found.group(3))
+        if a <= 12 and b <= 12 and a != b:
+            text += f" (el PDF dice '{evidence}', formato ambiguo: puede ser dia/mes o mes/dia)"
+            if date(year, a, b) < ship_date and date(year, b, a) < ship_date:
+                text += f" y la carga salio el {ship_date.isoformat()}. Con cualquiera de las dos lecturas es anterior al embarque."
+                return text
+    return text + f" y la carga salio el {ship_date.isoformat()}."
+
+
+def _annotation_reason(x: InvoiceExtraction, printed_text: str, extra: list[Decimal], load: Load) -> str:
+    notes = "; ".join(f"'{n.text}'" for n in x.handwritten_annotations)
+    top = max(extra)
+    diff = top - load.agreed_rate
+    return (f"Monto impreso {printed_text}, pactado {money(load.agreed_rate)} {load.currency}. "
+            f"Notas manuscritas leidas: {notes}. "
+            f"El mayor monto manuscrito ({money(top)}) se toma como total manuscrito, {diff:+,.2f} contra lo pactado.")
 
 
 def _carrier_key(name: str, aliases: dict[str, list[str]]) -> str:
@@ -155,16 +183,14 @@ def _invoice_findings(item: InvoiceInput, tolerance: Decimal,
 
     extra = [a for a in annotated_amounts(x) if v.amount is None or a != v.amount]
     if extra:
-        shown = ", ".join(money(a) for a in extra)
         printed_text = money(v.amount) if v.amount is not None else "no legible"
         out.append(Finding("ANNOTATED_AMOUNT", HIGH,
-                           f"Monto impreso {printed_text}, montos manuscritos {shown}, pactado {money(load.agreed_rate)} {load.currency}. "
-                           f"Se toma el mayor monto manuscrito ({money(max(extra))}) como total manuscrito.",
+                           _annotation_reason(x, printed_text, extra, load),
                            "Pedir sustento del cargo extra y autorizarlo por escrito antes de pagar."))
 
     if v.invoice_date is not None and v.invoice_date < load.ship_date:
         out.append(Finding("INVOICE_BEFORE_SHIPMENT", MEDIUM,
-                           f"La factura tiene fecha {v.invoice_date.isoformat()} y la carga salio el {load.ship_date.isoformat()}.",
+                           _date_reason(x, v.invoice_date, load.ship_date),
                            "Revisar la fecha de la factura: cobrar antes del embarque es inusual."))
     return out
 
