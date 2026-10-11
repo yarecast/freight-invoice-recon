@@ -12,8 +12,8 @@ suggestion_window_days = 14    # used only for SUGGESTIONS, never for auto-accep
 [extraction]
 prompt_version = "v1"
 request_timeout_s = 90
-delay_between_calls_s = 2
-max_retries = 4
+delay_between_calls_s = 15
+max_retries = 2
 
 # Canonical carrier name (as written in the register) -> accepted aliases.
 [carrier_aliases]

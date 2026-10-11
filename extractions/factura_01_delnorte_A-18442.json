@@ -1,0 +1,34 @@
+{
+  "source_file": "factura_01_delnorte_A-18442.pdf",
+  "source_sha256": "d4b49808dd9f9d9cc58485997ceafa78efdd56e08cb4ed95ee82d3749acac94b",
+  "extracted_at": "2026-10-11T16:56:08+00:00",
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v1",
+  "carrier": {
+    "value": "Transportes del Norte Mendoza, S.A. de C.V.",
+    "evidence": "Transportes del Norte Mendoza, S.A. de C.V."
+  },
+  "invoice_number": {
+    "value": "A-18442",
+    "evidence": "Folio: A-18442"
+  },
+  "load_ref": {
+    "value": "TRQ-4471",
+    "evidence": "Referencia de carga: TRQ-4471"
+  },
+  "invoice_date": {
+    "value": "2026-09-04",
+    "evidence": "Fecha de expedicion: 4 de septiembre de 2026"
+  },
+  "amount_printed": {
+    "value": "42,500.00",
+    "evidence": "TOTAL $42,500.00 MXN"
+  },
+  "currency": {
+    "value": "MXN",
+    "evidence": "TOTAL $42,500.00 MXN"
+  },
+  "handwritten_annotations": [],
+  "document_type": "FACTURA",
+  "legibility_notes": null
+}

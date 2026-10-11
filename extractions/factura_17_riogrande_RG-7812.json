@@ -1,0 +1,47 @@
+{
+  "source_file": "factura_17_riogrande_RG-7812.pdf",
+  "source_sha256": "f9e0073f138a9654d4ff83338e76d5c8be9efa631b3d381341bd768c5548e3de",
+  "extracted_at": "2026-10-11T17:06:21+00:00",
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v1",
+  "carrier": {
+    "value": "RIO GRANDE FREIGHT LINES",
+    "evidence": "RIO GRANDE FREIGHT LINES"
+  },
+  "invoice_number": {
+    "value": "RG-7812",
+    "evidence": "Invoice #: RG-7812"
+  },
+  "load_ref": {
+    "value": "TRQ-4487",
+    "evidence": "LOAD #\n\nTRQ-4487"
+  },
+  "invoice_date": {
+    "value": "2026-09-26",
+    "evidence": "Date: September 26, 2026"
+  },
+  "amount_printed": {
+    "value": "850.00",
+    "evidence": "TOTAL DUE $850.00 USD"
+  },
+  "currency": {
+    "value": "USD",
+    "evidence": "$850.00 USD"
+  },
+  "handwritten_annotations": [
+    {
+      "text": "+ 150 detention",
+      "amounts": [
+        "150"
+      ]
+    },
+    {
+      "text": "TOTAL 1,000",
+      "amounts": [
+        "1,000"
+      ]
+    }
+  ],
+  "document_type": "INVOICE",
+  "legibility_notes": null
+}

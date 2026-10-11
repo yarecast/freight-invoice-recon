@@ -1,0 +1,34 @@
+{
+  "source_file": "factura_06_pena_0438.pdf",
+  "source_sha256": "85da9de2ff47355b6aeb5ab436e7f6eb4ddbde706e13ca1b6c643fb295a087b5",
+  "extracted_at": "2026-10-10T21:24:26+00:00",
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v1",
+  "carrier": {
+    "value": "AUTOTRANSPORTES PENA HERMANOS",
+    "evidence": "AUTOTRANSPORTES PENA HERMANOS"
+  },
+  "invoice_number": {
+    "value": "0438",
+    "evidence": "No. de nota: 0438"
+  },
+  "load_ref": {
+    "value": "TRQ-4476",
+    "evidence": "Carga No.: TRQ-4476"
+  },
+  "invoice_date": {
+    "value": "2026-09-11",
+    "evidence": "Fecha: 11/09/2026"
+  },
+  "amount_printed": {
+    "value": "15,200.00",
+    "evidence": "$15,200.00 MXN"
+  },
+  "currency": {
+    "value": "MXN",
+    "evidence": "$15,200.00 MXN"
+  },
+  "handwritten_annotations": [],
+  "document_type": "nota de servicio",
+  "legibility_notes": null
+}

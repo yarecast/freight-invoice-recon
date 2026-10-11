@@ -1,0 +1,34 @@
+{
+  "source_file": "factura_02_riogrande_RG-7731.pdf",
+  "source_sha256": "e594ecaf98ff4d55a027ec50aa686e78c7e318af7aa9af299937623b977c2cef",
+  "extracted_at": "2026-10-11T16:57:10+00:00",
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v1",
+  "carrier": {
+    "value": "RIO GRANDE FREIGHT LINES",
+    "evidence": "RIO GRANDE FREIGHT LINES"
+  },
+  "invoice_number": {
+    "value": "RG-7731",
+    "evidence": "Invoice #: RG-7731"
+  },
+  "load_ref": {
+    "value": "TRQ-4472",
+    "evidence": "LOAD #\nTRQ-4472"
+  },
+  "invoice_date": {
+    "value": "2026-09-05",
+    "evidence": "Date: September 5, 2026"
+  },
+  "amount_printed": {
+    "value": "1,850.00",
+    "evidence": "TOTAL DUE $1,850.00 USD"
+  },
+  "currency": {
+    "value": "USD",
+    "evidence": "$1,850.00 USD"
+  },
+  "handwritten_annotations": [],
+  "document_type": "invoice",
+  "legibility_notes": null
+}

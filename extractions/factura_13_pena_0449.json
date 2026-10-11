@@ -1,0 +1,34 @@
+{
+  "source_file": "factura_13_pena_0449.pdf",
+  "source_sha256": "c639e34bae63b9c65699a159482e0f59ebd54a95e29ea654f38e52ad04a48717",
+  "extracted_at": "2026-10-11T17:00:52+00:00",
+  "model": "gemini-3.8-flash",
+  "prompt_version": "v1",
+  "carrier": {
+    "value": "AUTOTRANSPORTES PENA HERMANOS",
+    "evidence": "AUTOTRANSPORTES PENA HERMANOS"
+  },
+  "invoice_number": {
+    "value": "0449",
+    "evidence": "No. de nota:\n0449"
+  },
+  "load_ref": {
+    "value": "TRQ-9902",
+    "evidence": "Carga No.:\nTRQ-9902"
+  },
+  "invoice_date": {
+    "value": "2026-09-18",
+    "evidence": "Fecha:\n18/09/2026"
+  },
+  "amount_printed": {
+    "value": "13,400.00",
+    "evidence": "$13,400.00 MXN"
+  },
+  "currency": {
+    "value": "MXN",
+    "evidence": "$13,400.00 MXN"
+  },
+  "handwritten_annotations": [],
+  "document_type": "NOTA DE SERVICIO",
+  "legibility_notes": null
+}
