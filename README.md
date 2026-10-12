@@ -125,23 +125,87 @@ Pipeline: PDF files -> ingest -> extraction with Gemini -> JSON cache -> verific
 
 ## Results
 
-TODO
+Demo mode, 18 invoices, saved extractions:
+
+| Status | Invoices |
+|---|---|
+| ALTA (high) | 9 |
+| MEDIA (medium) | 1 |
+| BAJA (low) | 1 |
+| NADA QUE REVISAR | 7 |
+
+Exceptions by code:
+
+| Code | Invoices |
+|---|---|
+| AMOUNT_MISMATCH | 2 (11, 12) |
+| DUPLICATE_INVOICE_NUMBER | 2 (07, 08) |
+| DUPLICATE_LOAD_INVOICE | 2 (09, 10) |
+| NO_LOAD_MATCH | 2 (13, 16) |
+| ANNOTATED_AMOUNT | 1 (17) |
+| INVOICE_BEFORE_SHIPMENT | 1 (15) |
+| CURRENCY_NOT_PRINTED | 1 (14) |
+
+Register loads with no invoice (information only, not an exception): TRQ-4485 and TRQ-4486.
+
+**Comparison with my hand-written answer sheet.** I filled `tests/golden/expected.csv` by hand from the PDFs and the register, one row per invoice. `python scripts/compare_golden.py` compares it with the system:
+
+| Field | Matches |
+|---|---|
+| carrier, invoice number, load reference | 18/18 each |
+| amount, currency | 18/18 each |
+| handwriting (yes/no) and handwritten amount | 18/18 each |
+| status | 18/18 |
+| invoice date | 17/18 |
+| exception codes | 16/18 |
+
+There are 3 differences and I left them visible:
+- Invoices 07 and 08: I expected both duplicate codes, the tool shows only DUPLICATE_INVOICE_NUMBER. This is the merge described above.
+- Invoice 15: the date "03/04/2026" is ambiguous (see above). The result is the same with both readings.
+
+**What the real data does not test.** EXTRACTION_MISMATCH and SINGLE_READ_LOW_LEGIBILITY do not appear in these 18 invoices (no extraction has legibility notes). They are tested only with fixtures in `tests/`.
 
 ## What I would do with more time
 
-TODO
+- Read photos and scans twice (for example with a second model or a second pass) and compare, because today they have a single read.
+- Ask the model to return an empty date when the date format cannot be known, instead of choosing one.
+- Run a measured comparison against an OCR-based approach, and test with many more invoices.
+- Move to a paid API tier and process invoices in batches or in parallel.
+- Suggest candidate loads with a human confirmation step, instead of only listing them.
+- Let the operations team mark each exception as reviewed, and keep that history.
+- Add a retention policy for invoice files and extractions.
 
 ## Left out
 
-TODO
+On purpose, to keep the scope narrow and finish in 3-4 hours:
+
+- Currency conversion (FX). Amounts are compared in the currency of the register.
+- Tax and CFDI validation.
+- Fuzzy matching in production. Only exact matching on the load reference.
+- Email intake of invoices.
+- A user interface. The report is a static file.
+- Multi-page invoices. Files are limited by page count in `config.toml`.
+- Auto-approval or payment. The tool only reports.
 
 ## Limitations
 
-TODO
+- **Photos and scans have a single read.** There is no text layer to double-check the model, so they are marked as single read.
+- **Handwriting.** The model can misread handwritten notes. I have only one invoice with handwritten amounts (RG-7812).
+- **Model variance.** The model can change between runs, even with temperature 0. The JSON cache is why the demo gives the same result every time.
+- **Dates.** The model decides how to read a date such as "03/04/2026". The tool cannot tell if it is right.
+- **Amount format.** Amounts are parsed only in the format 1,000.00. Other formats (for example 1.000,00) are not parsed.
+- **Small sample.** The 18 invoices are not an estimate of accuracy in general, and the answer sheet was written by one person.
+- **Free tier.** Google AI Studio gives about 20 requests per day per model, and failed calls count. A quota error stops the run. Data sent on the free tier may be used by Google to improve its products (check the current terms). For real invoices I would use a paid tier.
+- **Data retention.** Invoices contain business data. In production the extractions need a retention policy.
 
 ## Security notes
 
-TODO
+- PDFs are treated as untrusted input. The code does not use `eval`, `pickle` or shell commands on their content.
+- All extracted text is HTML-escaped in the report, which has no JavaScript and makes no external requests. A test checks this.
+- CSV cells that start with `=`, `+`, `-` or `@` get a leading apostrophe, so Excel does not run them as formulas. A test checks this.
+- The API key comes only from the `GEMINI_API_KEY` environment variable (loaded from `.env`, which Git ignores). It is never printed, logged or committed.
+- Dependencies are pinned in `requirements.txt`.
+- The model only extracts fields. Matching and decisions are code, so text inside a PDF cannot approve anything. I did not test prompt-injection attacks inside invoices, so the extracted fields of a hostile PDF could still be wrong.
 
 ## Where I used AI assistants and where I overrode them
 
