@@ -209,4 +209,17 @@ On purpose, to keep the scope narrow and finish in 3-4 hours:
 
 ## Where I used AI assistants and where I overrode them
 
-TODO (author): write this from docs/ai_usage_notes.md.
+**Where I used AI.** I built this project with Claude (Anthropic) as a pair-programming mentor, in a chat. We worked in small steps. For each step it explained what we were doing and why, and gave me the command or the file. I ran it myself and pasted the real output, and we did not continue until the output was what we expected. I used it for the code, the tests, the README and the Spanish summary. Gemini is a different part: it only reads the invoices inside the tool.
+
+**How I checked the work.**
+- I ran every command and read the real output before going on.
+- I checked each saved extraction against its PDF.
+- I wrote the answer sheet (`tests/golden/expected.csv`) by hand from the PDFs and the register, not from the output of the system, and compared it with the system.
+- Tests and CI run on every push.
+
+**Where I corrected or changed the assistant.**
+1. **Invoices 07 and 08.** The report was confusing, because they are the same invoice (one digital, one scanned copy). I pointed this out. The two duplicate codes were merged into one and the reason text was changed.
+2. **Invoice 15 date.** I questioned the date "03/04/2026". We did not edit the extraction. The date is documented as ambiguous.
+3. **README for non-technical readers.** The first README draft told the reviewer to open a terminal and paste commands. I did not want that, and this is why I chose Colab. The README now starts with the report and the notebook, and the commands are in sections that start closed.
+4. **"The tool does not approve anything".** The first wording made it sound like the tool does not do the matching. I pointed out that matching is part of the task. The text now says the tool matches and flags, but does not approve or pay.
+5. **Status label.** I thought "SIN HALLAZGOS" was not clear for an operations person and I asked to change it. The assistant warned that a green check alone could look like an approval. We used the text "NADA QUE REVISAR" with a small check icon.
