@@ -1,0 +1,19 @@
+source_file,carrier,invoice_number,load_ref,invoice_date,amount_printed,currency,has_handwriting,annotated_amount,expected_status,expected_codes,notes
+factura_01_delnorte_A-18442.pdf,Transportes del Norte Mendoza,A-18442,TRQ-4471,2026-09-04,42500.00,MXN,no,,SIN_HALLAZGOS,,match correcto
+factura_02_riogrande_RG-7731.pdf,Rio Grande Freight Lines,RG-7731,TRQ-4472,2026-09-05,1850.00,USD,no,,SIN_HALLAZGOS,,match correcto
+factura_03_pena_0431.pdf,Autotransportes Pena Hermanos,0431,TRQ-4473,2026-09-05,8900.00,MXN,no,,SIN_HALLAZGOS,,match correcto
+factura_04_delnorte_A-18461.pdf,Transportes del Norte Mendoza,A-18461,TRQ-4474,2026-09-07,38000.00,MXN,no,,SIN_HALLAZGOS,,match correcto
+factura_05_riogrande_RG-7744.pdf,Rio Grande Freight Lines,RG-7744,TRQ-4475,2026-09-10,975.00,USD,no,,SIN_HALLAZGOS,,match correcto
+factura_06_pena_0438.pdf,Autotransportes Pena Hermanos,0438,TRQ-4476,2026-09-11,15200.00,MXN,no,,SIN_HALLAZGOS,,match correcto
+factura_07_delnorte_A-18477.pdf,Transportes del Norte Mendoza,A-18477,TRQ-4477,2026-09-12,45000.00,MXN,no,,HIGH,DUPLICATE_INVOICE_NUMBER;DUPLICATE_LOAD_INVOICE,duplicado
+factura_08_delnorte_A-18477.pdf,Transportes del Norte Mendoza,A-18477,TRQ-4477,2026-09-12,45000.00,MXN,no,,HIGH,DUPLICATE_INVOICE_NUMBER;DUPLICATE_LOAD_INVOICE,duplicado
+factura_09_riogrande_RG-7752.pdf,Rio Grande Freight Lines,RG-7752,TRQ-4478,2026-09-14,2400.00,USD,no,,HIGH,DUPLICATE_LOAD_INVOICE,mismo loadid
+factura_10_riogrande_RG-7889.pdf,Rio Grande Freight Lines,RG-7889,TRQ-4478,2026-09-29,2400.00,USD,no,,HIGH,DUPLICATE_LOAD_INVOICE,mismo loadid
+factura_11_pena_0444.pdf,Autotransportes Pena Hermanos,0444,TRQ-4479,2026-09-16,9200.00,MXN,no,,HIGH,AMOUNT_MISMATCH,amount no coincide
+factura_12_delnorte_A-18502.pdf,Transportes del Norte Mendoza,A-18502,TRQ-4480,2026-09-17,58000.00,MXN,no,,HIGH,AMOUNT_MISMATCH,amount no coincide
+factura_13_pena_0449.pdf,Autotransportes Pena Hermanos,0449,TRQ-9902,2026-09-18,13400.00,MXN,no,,HIGH,NO_LOAD_MATCH,no hay registro del load aun
+factura_14_delnorte_A-18516.pdf,Transportes del Norte Mendoza,A-18516,TRQ-4483,2026-09-20,18500.00,,no,,LOW,CURRENCY_NOT_PRINTED,no esta impresa la moneda
+factura_15_riogrande_RG-7801.pdf,Rio Grande Freight Lines,RG-7801,TRQ-4484,2026-04-03,2100.00,USD,no,,MEDIUM,INVOICE_BEFORE_SHIPMENT,aun no se hace el ship y fecha ambigua
+factura_16_pena_0455.pdf,Autotransportes Pena Hermanos,0455,TRQ-4845,2026-09-24,22000.00,MXN,no,,HIGH,NO_LOAD_MATCH,no hay registro del load aun
+factura_17_riogrande_RG-7812.pdf,Rio Grande Freight Lines,RG-7812,TRQ-4487,2026-09-26,850.00,USD,yes,1000.00,HIGH,ANNOTATED_AMOUNT,lo impreso si coincide con lo pactado pero lo anotado a mano no
+factura_18_pena_0461.pdf,Autotransportes Pena Hermanos,0461,TRQ-4488,2026-09-27,15200.00,MXN,no,,SIN_HALLAZGOS,,match correcto

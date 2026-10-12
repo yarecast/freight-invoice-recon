@@ -67,7 +67,7 @@ def run_live(settings: Settings, only_missing: bool) -> int:
     return 0 if failed == 0 else 1
 
 
-def make_report(settings: Settings, mode: str) -> None:
+def analyze(settings: Settings):
     registry = load_registry(ROOT / "data" / "registro_de_cargas.csv")
     items: list[InvoiceInput] = []
     metas: list[dict] = []
@@ -101,6 +101,11 @@ def make_report(settings: Settings, mode: str) -> None:
     results = evaluate(items, settings.amount_tolerance, settings.carrier_aliases)
     rows = build_rows(items, results)
     unmatched = loads_without_invoice(registry, items)
+    return items, rows, unmatched, metas, warnings
+
+
+def make_report(settings: Settings, mode: str) -> None:
+    items, rows, unmatched, metas, warnings = analyze(settings)
     dates = sorted(m["extracted_at"] for m in metas if m.get("extracted_at"))
     meta = {
         "mode": "demo (lee extractions/, sin red ni clave)" if mode == "demo"
