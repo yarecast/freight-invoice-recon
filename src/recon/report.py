@@ -8,7 +8,7 @@ from .matching import Load
 from .rules import HIGH, LOW, MEDIUM, NO_FINDINGS, SEVERITY_ORDER, Finding, InvoiceInput, status_of
 
 STATUS_ORDER = (HIGH, MEDIUM, LOW, NO_FINDINGS)
-LABELS = {HIGH: "ALTA", MEDIUM: "MEDIA", LOW: "BAJA", NO_FINDINGS: "SIN HALLAZGOS"}
+LABELS = {HIGH: "ALTA", MEDIUM: "MEDIA", LOW: "BAJA", NO_FINDINGS: "NADA QUE REVISAR"}
 CSV_DANGEROUS = ("=", "+", "-", "@", "\t", "\r")
 CSV_COLUMNS = ("source_file", "carrier", "invoice_number", "load_ref", "invoice_date",
                "amount_printed", "currency", "read_mode", "status", "codes", "reasons", "actions")
@@ -100,8 +100,14 @@ def _table(headers: tuple[str, ...], body: list[str]) -> str:
     return f'<div class="wrap"><table><thead><tr>{head}</tr></thead><tbody>{"".join(body)}</tbody></table></div>'
 
 
+CHECK_SVG = ('<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true" focusable="false" '
+             'style="vertical-align:-1px;margin-right:4px"><path d="M3 8.5l3.2 3.2L13 4.8" fill="none" '
+             'stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>')
+
+
 def _badge(status: str) -> _Raw:
-    return _Raw(f'<span class="badge {status.lower()}">{html.escape(LABELS[status])}</span>')
+    icon = CHECK_SVG if status == NO_FINDINGS else ""
+    return _Raw(f'<span class="badge {status.lower()}">{icon}{html.escape(LABELS[status])}</span>')
 
 
 def render_html(rows: list[InvoiceRow], unmatched: list[Load], meta: dict) -> str:
