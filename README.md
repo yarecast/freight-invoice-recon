@@ -197,6 +197,7 @@ On purpose, to keep the scope narrow and finish in 3-4 hours:
 - **Small sample.** The 18 invoices are not an estimate of accuracy in general, and the answer sheet was written by one person.
 - **Free tier.** Google AI Studio gives about 20 requests per day per model, and failed calls count. A quota error stops the run. Data sent on the free tier may be used by Google to improve its products (check the current terms). For real invoices I would use a paid tier.
 - **Data retention.** Invoices contain business data. In production the extractions need a retention policy.
+- **Colab warning.** When the notebook installs the requirements, Colab may print a red pip message about the `google-auth` version. It comes from a package that Colab itself installs. The demo is not affected. I did not test the optional live cell.
 
 ## Security notes
 
